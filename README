@@ -1,0 +1,20 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=1511
+
+Manuscript format is the page layout in which most editors prefer to receive writers' submittals of text (novels, short stories, etc.) for publication.  This small script sets text to 60 columns/five character tabs, reasonable defaults for editing a manuscript as plain text.  Printing is set to 12-point Courier.
+
+It doesn't do much more than this; page headers and line spacing is _not_ automatically set correctly in printed output.  Nonetheless I have provided it in the hope that someone will find it useful.
+
+Type ":setfiletype manuscript" from within Vim to run the script.
+
+Use the following line in your .vimrc file to associate manuscript.vim with the ".manuscript.txt" file extension:
+
+au BufNewFile,BufRead *.manuscript.txt setf manuscript
+
+Use the following six lines in your .vimrc file to add some useful key mappings (_mf, _mF and _MF):
+
+" Use _mf to reformat whole document, paragraphs wrapped to 60 columns.
+map _mf :setlocal tw=60 ts=5 sts=5 et sw=5 noai fo+=aw2tq nonu<CR>ggVGgq
+" Use _mF to remove excess linefeeds/spaces, useful before issuing _MF.
+map _mF :%s/^[\n \t]\+/\r/<CR>
+" Use _MF to reformat with newlines only at the end of each paragraph.
+map _MF :setlocal tw=99999999 nu<CR>ggVGgq
